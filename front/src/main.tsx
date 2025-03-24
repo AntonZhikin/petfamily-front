@@ -3,10 +3,10 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./app/router";
 import "./index.css";
-import { darkTheme } from "./theme";
+import { lightTheme } from "./theme";
 
 createRoot(document.getElementById("root")!).render(
-	<ThemeProvider theme={darkTheme}>
+	<ThemeProvider theme={lightTheme}>
 		<RouterProvider router={router} />
 	</ThemeProvider>
 );

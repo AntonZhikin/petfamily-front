@@ -3,7 +3,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 
 export function Footer() {
 	return (
-		<div className="flex flex-row bg-gray-900 py-8 w-full justify-between">
+		<div className="flex flex-row bg-gray-900 py-4 w-full justify-between relative">
 			<div className="flex flex-row px-5 gap-3">
 				<TelegramIcon />
 				<LocalPhoneIcon />
