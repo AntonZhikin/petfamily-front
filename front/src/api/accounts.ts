@@ -1,10 +1,37 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import { Envelope } from "../models/Envelope";
+import { LoginResponce } from "../models/LoginResponce";
+import { api, API_URL } from "./api";
 
-const API_URL: string = "http://localhost:5007/api/";
+export enum ErrorType {
+	Validation = 0,
+	NotFound,
+	Failure,
+	Conflict,
+}
 
-export async function getUsers() {
-	const responce = await axios.get<string[]>(API_URL + "users");
-	await new Promise((resolve) => setTimeout(resolve, 3000));
+export class AccountsService {
+	static async login(
+		email: string,
+		password: string
+	): Promise<AxiosResponse<Envelope<LoginResponce>>> {
+		return api.post<Envelope<LoginResponce>>("accounts/login", {
+			email,
+			password,
+		});
+	}
 
-	return responce.data;
+	static async refresh() {
+		return axios.post<Envelope<LoginResponce>>(
+			API_URL + "accounts/refresh",
+			{},
+			{
+				withCredentials: true,
+			}
+		);
+	}
+
+	static async logout() {
+		return api.post<Envelope<LoginResponce>>("accounts/logout");
+	}
 }
