@@ -46,21 +46,19 @@ export const AuthProvider = ({ children }: Props) => {
 					const originalRequest = error.config;
 
 					try {
-						if (error.responce.status === 401) {
-							const responce = await AccountsService.refresh();
+						const responce = await AccountsService.refresh();
 
-							setAcccesToken(responce.data.result!.accessToken);
-							setUser({
-								email: responce.data.result!.email,
-								id: responce.data.result!.id,
-							} as User);
+						setAcccesToken(responce.data.result!.accessToken);
+						setUser({
+							email: responce.data.result!.email,
+							id: responce.data.result!.userId,
+						} as User);
 
-							originalRequest.headers.Authorization = `Bearer ${
-								responce.data.result!.accessToken
-							}`;
+						originalRequest.headers.Authorization = `Bearer ${
+							responce.data.result!.accessToken
+						}`;
 
-							return api(originalRequest);
-						}
+						return api(originalRequest);
 					} catch {
 						setAcccesToken(undefined);
 					}
