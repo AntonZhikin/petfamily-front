@@ -1,5 +1,7 @@
-import { Skeleton, TextField } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { IconButton, InputAdornment, Skeleton, TextField } from "@mui/material";
 import Button from "@mui/material/Button/Button";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth/useAuth";
@@ -20,10 +22,12 @@ export function LoginPage() {
 
 	const navigate = useNavigate();
 
+	const [showPassword, setShowPassword] = useState<boolean>(false);
+
 	const onSubmit = async (data: LoginFields) => {
 		await login(data.email, data.password);
 
-		navigate("/profile");
+		//navigate("/profile");
 	};
 	return (
 		<>
@@ -36,9 +40,9 @@ export function LoginPage() {
 							Обратно на главную
 						</NavLink>
 
-						<div className="text-black">
+						{/* <div className="text-black">
 							<p>accestoken - {accessToken}</p>
-						</div>
+						</div> */}
 
 						<div className="flex flex-col flex-1 min-w-80 mx-auto justify-center gap-9 py-24 border-">
 							<div className="flex flex-row text-3xl text-black justify-center">
@@ -60,8 +64,23 @@ export function LoginPage() {
 								<TextField
 									variant="standard"
 									label="Password"
+									type={showPassword ? "text" : "password"}
 									fullWidth
-									{...register("password")}
+									{...register("password", { required: "Введите пароль" })}
+									error={!!errors.password}
+									helperText={errors.password?.message}
+									InputProps={{
+										endAdornment: (
+											<InputAdornment position="end">
+												<IconButton
+													onClick={() => setShowPassword(!showPassword)}
+													edge="end"
+												>
+													{showPassword ? <VisibilityOff /> : <Visibility />}
+												</IconButton>
+											</InputAdornment>
+										),
+									}}
 								/>
 
 								<Button type="submit" disabled={isLoading}>
