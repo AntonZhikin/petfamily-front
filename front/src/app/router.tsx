@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import { Upload } from "../components/Upload";
 import { LoginPage } from "../pages/Login/LoginPage";
 import { Main } from "../pages/Main/MainPage";
 import { ProfilePage } from "../pages/Profile/ProfilePage";
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
 			{
 				path: "volunteer-page",
 				element: <VolunteerPage />,
+			},
+			{
+				path: "upload",
+				element: <Upload />,
 			},
 			{
 				path: "profile",

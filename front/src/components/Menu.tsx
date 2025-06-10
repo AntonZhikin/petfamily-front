@@ -24,6 +24,14 @@ export function Menu() {
 				<VolunteerActivismIcon color="primary" />
 				<div className="text-black">Помочь животным</div>
 			</NavLink>
+			<NavLink
+				to={"upload"}
+				className="flex flex-row items-center gap-0.5"
+				color="primary"
+			>
+				<VolunteerActivismIcon color="primary" />
+				<div className="text-black">Загрузка</div>
+			</NavLink>
 		</div>
 	);
 }

@@ -8,6 +8,12 @@ export type Props = {
 };
 
 export function RootLayout() {
+	// useEffect(() => {
+	// 	axios
+	// 		.get("http://localhost/api/volunteers")
+	// 		.then((res) => console.log(res.data));
+	// });
+
 	return (
 		<div className="min-h-screen flex flex-col">
 			<Header />
